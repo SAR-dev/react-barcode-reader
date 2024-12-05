@@ -2,15 +2,17 @@ import { useRef, useState } from 'react';
 import useScanDetection from './useScanDetection';
 
 function App() {
-  const [tempValue, setTempvalue] = useState("")
-
+  const [value, setValue] = useState<string | undefined>('');
   const inputRef = useRef<HTMLInputElement>(null);
+  
+  const [keys, setKeys] = useState<string[]>([])
 
   const handleScanComplete = (e: string) => {
     if (inputRef.current) {
       const scannedValue = e.toUpperCase();
-      // inputRef.current.value = scannedValue;
-      setTempvalue(scannedValue);
+      // alert("Scanned: " + scannedValue)
+      inputRef.current.value = scannedValue;
+      setValue(scannedValue);
     }
   };
 
@@ -26,15 +28,15 @@ function App() {
         type="text"
         className="border border-gray-500 rounded w-64 py-1 px-2"
         ref={inputRef}
-        onChange={e => setTempvalue(e.target.value)}
-        value={tempValue}
-        // onKeyDown={(event) => {
-        //   if (event.key === 'Enter') {
-        //     setValue(tempValue);
-        //   }
-        // }}
+        onKeyDown={(event) => {
+          setKeys([...keys, event.key])
+          if (event.key === 'Enter') {
+            setValue(inputRef.current?.value || '');
+          }
+        }}
       />
-      <div>✍: {tempValue}</div>
+      <div>✍: {value}</div>
+      <div>Keys: {keys.join(", ")}</div>
     </div>
   );
 }
