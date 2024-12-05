@@ -12,6 +12,7 @@ function App() {
       const scannedValue = e.toUpperCase();
       inputRef.current.value = scannedValue;
       setValue(scannedValue);
+      // set input change disabled and release after 2 sec
     }
   };
 
