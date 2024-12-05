@@ -5,7 +5,7 @@ function App() {
   const [value, setValue] = useState<string | undefined>('');
   const inputRef = useRef<HTMLInputElement>(null);
   
-  // const [keys, setKeys] = useState<string[]>([])
+  const [keys, setKeys] = useState<string[]>([])
 
   const handleScanComplete = (e: string) => {
     if (inputRef.current) {
@@ -34,15 +34,15 @@ function App() {
             setValue(inputRef.current?.value || '');
           }
         }}
-        // onKeyDown={(event) => {
-        //   setKeys([...keys, event.key])
-        //   if (event.key === 'Enter') {
-        //     setValue(inputRef.current?.value || '');
-        //   }
-        // }}
+        onKeyDown={(event) => {
+          setKeys([...keys, event.key])
+          if (event.key === 'Enter') {
+            setValue(inputRef.current?.value || '');
+          }
+        }}
       />
       <div>✍: {value}</div>
-      {/* <div>Keys: {keys.join(", ")}</div> */}
+      <div>Keys: {keys.join(", ")}</div>
     </div>
   );
 }
