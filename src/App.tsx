@@ -27,8 +27,8 @@ function App() {
         ref={inputRef}
         onKeyDown={(event) => {
           if (event.key === 'Enter') {
-            const value = (event.target as HTMLInputElement).value;
-            setValue(value);
+            const val = (event.target as HTMLInputElement).value;
+            setValue(val);
           }
         }}
       />
