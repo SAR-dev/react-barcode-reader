@@ -2,22 +2,14 @@ import { useRef, useState } from 'react';
 import useScanDetection from './useScanDetection';
 
 function App() {
-  // const [value, setValue] = useState<string | undefined>('');
-  const [disabled, setDisabled] = useState(false)
+  const [value, setValue] = useState<string | undefined>('');
   const inputRef = useRef<HTMLInputElement>(null);
   
-  const [keys, setKeys] = useState<string[]>([])
-  const [values, setValues] = useState<string[]>([])
-
   const handleScanComplete = (e: string) => {
     if (inputRef.current) {
       const scannedValue = e.toUpperCase();
       inputRef.current.value = scannedValue;
-      // setValue(scannedValue);
-      setDisabled(true)
-      setTimeout(() => {
-        setDisabled(() => false);
-      }, 2000);
+      setValue(scannedValue);
     }
   };
 
@@ -35,14 +27,12 @@ function App() {
         ref={inputRef}
         onKeyDown={(event) => {
           if (event.key === 'Enter') {
-            setValues([...values, inputRef.current?.value || '']);
+            const value = (event.target as HTMLInputElement).value;
+            setValue(value);
           }
         }}
-        onChange={e => setKeys([...keys, e.target.value])}
-        disabled={disabled}
       />
-      <div>✍: {values.join(", ")}</div>
-      <div>Keys: {keys.join(", ")}</div>
+      <div>✍: {value}</div>
     </div>
   );
 }
