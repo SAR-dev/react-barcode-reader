@@ -2,6 +2,8 @@ import { useRef, useState } from 'react';
 import useScanDetection from './useScanDetection';
 
 function App() {
+  const [tempValue, setTempValue] = useState<string | undefined>('');
+  
   const [value, setValue] = useState<string | undefined>('');
   const inputRef = useRef<HTMLInputElement>(null);
   
@@ -25,10 +27,10 @@ function App() {
         type="text"
         className="border border-gray-500 rounded w-64 py-1 px-2"
         ref={inputRef}
+        onChange={e => setTempValue(e.target.value)}
         onKeyDown={(event) => {
           if (event.key === 'Enter') {
-            const val = (event.target as HTMLInputElement).value;
-            setValue(val);
+            setValue(tempValue);
           }
         }}
       />
