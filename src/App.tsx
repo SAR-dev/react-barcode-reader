@@ -3,6 +3,7 @@ import useScanDetection from './useScanDetection';
 
 function App() {
   const [value, setValue] = useState<string | undefined>('');
+  const [disabled, setDisabled] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null);
   
   const [keys, setKeys] = useState<string[]>([])
@@ -12,7 +13,10 @@ function App() {
       const scannedValue = e.toUpperCase();
       inputRef.current.value = scannedValue;
       setValue(scannedValue);
-      // set input change disabled and release after 2 sec
+      setDisabled(true)
+      setTimeout(() => {
+        setDisabled(() => false);
+      }, 2000);
     }
   };
 
@@ -34,6 +38,7 @@ function App() {
             setValue(inputRef.current?.value || '');
           }
         }}
+        disabled={disabled}
       />
       <div>✍: {value}</div>
       <div>Keys: {keys.join(", ")}</div>
