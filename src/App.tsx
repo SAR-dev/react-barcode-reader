@@ -33,11 +33,11 @@ function App() {
         className="border border-gray-500 rounded w-64 py-1 px-2"
         ref={inputRef}
         onKeyDown={(event) => {
-          setKeys([...keys, event.key])
           if (event.key === 'Enter') {
             setValue(inputRef.current?.value || '');
           }
         }}
+        onChange={e => setKeys([...keys, e.target.value])}
         disabled={disabled}
       />
       <div>✍: {value}</div>
