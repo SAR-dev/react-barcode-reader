@@ -32,7 +32,7 @@ function App() {
           }
         }}
       />
-      <div>✍: {value}</div>
+      <div>✍1: {value}</div>
     </div>
   );
 }
