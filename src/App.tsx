@@ -10,7 +10,6 @@ function App() {
   const handleScanComplete = (e: string) => {
     if (inputRef.current) {
       const scannedValue = e.toUpperCase();
-      // alert("Scanned: " + scannedValue)
       inputRef.current.value = scannedValue;
       setValue(scannedValue);
     }
