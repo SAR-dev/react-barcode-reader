@@ -3,14 +3,14 @@ import useScanDetection from './useScanDetection';
 
 function App() {
   const [value, setValue] = useState<string | undefined>('');
+  const [tempValue, setTempvalue] = useState("")
+
   const inputRef = useRef<HTMLInputElement>(null);
-  
-  const [keys, setKeys] = useState<string[]>([])
 
   const handleScanComplete = (e: string) => {
     if (inputRef.current) {
+      setTempvalue("")
       const scannedValue = e.toUpperCase();
-      // alert("Scanned: " + scannedValue)
       inputRef.current.value = scannedValue;
       setValue(scannedValue);
     }
@@ -28,21 +28,14 @@ function App() {
         type="text"
         className="border border-gray-500 rounded w-64 py-1 px-2"
         ref={inputRef}
-        onInput={(event) => {
-          const inputEvent = event.nativeEvent as InputEvent;
-          if (inputEvent.inputType === 'insertText') {
-            setValue(inputRef.current?.value || '');
-          }
-        }}
+        onChange={e => setTempvalue(e.target.value)}
         onKeyDown={(event) => {
-          setKeys([...keys, event.key])
           if (event.key === 'Enter') {
-            setValue(inputRef.current?.value || '');
+            setValue(tempValue);
           }
         }}
       />
       <div>✍: {value}</div>
-      <div>Keys: {keys.join(", ")}</div>
     </div>
   );
 }
