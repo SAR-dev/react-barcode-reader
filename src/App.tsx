@@ -36,6 +36,7 @@ function App() {
         }}
       />
       <div>✍: {value}</div>
+      <div>T: {tempValue}</div>
     </div>
   );
 }
