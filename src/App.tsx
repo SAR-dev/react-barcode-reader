@@ -28,12 +28,18 @@ function App() {
         type="text"
         className="border border-gray-500 rounded w-64 py-1 px-2"
         ref={inputRef}
-        onKeyDown={(event) => {
-          setKeys([...keys, event.key])
-          if (event.key === 'Enter') {
+        onInput={(event) => {
+          const inputEvent = event.nativeEvent as InputEvent;
+          if (inputEvent.inputType === 'insertText') {
             setValue(inputRef.current?.value || '');
           }
         }}
+        // onKeyDown={(event) => {
+        //   setKeys([...keys, event.key])
+        //   if (event.key === 'Enter') {
+        //     setValue(inputRef.current?.value || '');
+        //   }
+        // }}
       />
       <div>✍: {value}</div>
       <div>Keys: {keys.join(", ")}</div>
