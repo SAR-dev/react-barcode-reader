@@ -3,8 +3,7 @@ import useScanDetection from './useScanDetection';
 
 function App() {
   const [tempValue, setTempValue] = useState<string | undefined>('');
-  
-  const [value, setValue] = useState<string | undefined>('');
+
   const inputRef = useRef<HTMLInputElement>(null);
   
   const handleScanComplete = (e: string) => {
@@ -35,7 +34,6 @@ function App() {
           }
         }}
       />
-      <div>✍1: {value}</div>
       <div>✍2: {tempValue}</div>
     </div>
   );
