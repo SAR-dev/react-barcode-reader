@@ -11,7 +11,6 @@ function App() {
     if (inputRef.current) {
       const scannedValue = e.toUpperCase();
       inputRef.current.value = scannedValue;
-      setValue(scannedValue);
     }
   };
 
@@ -30,7 +29,9 @@ function App() {
         onChange={e => setTempValue(e.target.value)}
         onKeyDown={(event) => {
           if (event.key === 'Enter') {
-            setValue(tempValue);
+            if (inputRef.current){
+              inputRef.current.value = tempValue || ""
+            };
           }
         }}
       />
